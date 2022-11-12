@@ -11,7 +11,7 @@ detector = HandDetector(maxHands=1)
 offset = 50
 imgSize = 300
 
-folder = "Data/C"
+folder = "Data/A"
 counter = 0
 
 

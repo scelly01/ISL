@@ -14,20 +14,21 @@ offset = 50
 imgSize = 300
 counter = 0
 
-labels = ["A", "B", "C"]
+labels = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M",
+          "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"]
 
 while True:
     success, img = cap.read()
     hands = detector.findHands(img, draw=False)
 
 
-    filtered = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    filtered = cv2.cvtColor(img, cv2.COqLOR_BGR2GRAY)
     filtered = cv2.GaussianBlur(filtered, (5, 5), 2)
     # _, filtered = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
     filtered = cv2.adaptiveThreshold(filtered, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
     ret, filtered = cv2.threshold(filtered, 170, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
-    cv2.imshow("Original", img)
+    #cv2.imshow("Original", img)
 
 
     if hands:
@@ -51,7 +52,8 @@ while True:
 
                 gray2rgb = cv2.cvtColor(imgWhite, cv2.COLOR_GRAY2RGB)
                 prediction, index = classifier.getPrediction(gray2rgb)
-                print(prediction,labels[index])
+                print(labels[index])
+                print(prediction)
             else:
                 k = imgSize / w
                 hCal = math.ceil(k * h)
@@ -62,11 +64,12 @@ while True:
 
                 gray2rgb = cv2.cvtColor(imgWhite, cv2.COLOR_GRAY2RGB)
                 prediction, index = classifier.getPrediction(gray2rgb)
-                print(prediction, labels[index])
-
+                print(labels[index])                #if(
+                print(prediction)
+                
             if (x-offset > 0 and x+offset < img.shape[1]  and  y-offset > 0  and  y+offset < img.shape[0]):
                 cv2.imshow("Filtered", filtered)
-                cv2.imshow("Cropped", imgCrop)
+                #cv2.imshow("Cropped", imgCrop)
                 cv2.imshow("Final", imgWhite)
 
         except:
