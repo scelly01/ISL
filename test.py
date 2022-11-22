@@ -7,9 +7,8 @@ import math
 
 
 cap = cv2.VideoCapture(0)
-detector = HandDetector(maxHands=1)
+detector = HandDetector(maxHands=2)
 classifier = Classifier("model/all_keras_model.h5", "model/all_labels.txt")
-kvu_classifier = Classifier("model/kvu_keras_model.h5", "model/kvu_labels.txt")
 
 offset = 50
 imgSize = 300
@@ -18,7 +17,6 @@ counter = 0
 
 labels = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M",
           "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"]
-kvu_labels = ["K", "V", "U"]
 
 
 while True:
@@ -28,7 +26,6 @@ while True:
 
     filtered = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     filtered = cv2.GaussianBlur(filtered, (5, 5), 2)
-    # _, filtered = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
     filtered = cv2.adaptiveThreshold(filtered, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
     ret, filtered = cv2.threshold(filtered, 170, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
