@@ -1,4 +1,5 @@
-Real Time Sign Language Recognition Edge Computing device 
+Real Time Sign Language Recognition Edge Computing device \
+
 using Nvidia Jetson Nano Developer's Kit
 
 Demo Video:
